@@ -1,2 +1,2 @@
 # Build-Simple-Database-in-MySQL
-This was just a subtask for managing meetings' files on a bigger poroject called ' Paperless University'. My task was to design a simple database for storing files, meetings, and users’ interactions on  files for each meeting.
+My subtask for managing meetings' files for the prototype 'Paperless University'. The task is to design a simple database for storing files, meetings, and users’ interactions on  files for each meeting.
