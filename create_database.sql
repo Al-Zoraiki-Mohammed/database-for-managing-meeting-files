@@ -1,5 +1,5 @@
-CREATE DATABASE paperless_university_v2;
-USE paperless_university_v2;
+CREATE DATABASE IF NOT EXISTS paperless_university;
+USE paperless_university;
 
 CREATE TABLE Users  (
     UserID INT PRIMARY KEY,

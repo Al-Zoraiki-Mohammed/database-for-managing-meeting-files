@@ -1,4 +1,4 @@
-USE paperless_university_v2;
+USE paperless_university;
 
 INSERT INTO Users (UserID, UserName, Email, Password, UserType)
 	VALUES (1, 'Mohammed Al-Zoraiki', 'mama@gamil.com', 'hashed_password', 'Admin'),
