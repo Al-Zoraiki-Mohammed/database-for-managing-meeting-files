@@ -5,11 +5,9 @@ COPY *.sql /docker-entrypoint-initdb.d/
 
 # Set environment variables (for root password, database, and user)
 ENV MYSQL_ROOT_PASSWORD=rootpassword
-ENV MYSQL_DATABASE=paperless_university
+ENV MYSQL_DATABASE=meeting_fiiles
 ENV MYSQL_USER=myuser
 ENV MYSQL_PASSWORD=mypassword
-
-
 
 # Expose the default MySQL port
 EXPOSE 3306

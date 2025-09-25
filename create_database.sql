@@ -1,13 +1,15 @@
-CREATE DATABASE IF NOT EXISTS paperless_university;
-USE paperless_university;
+CREATE DATABASE IF NOT EXISTS meeting_fiiles;
+USE meeting_fiiles;
+
 
 CREATE TABLE Users  (
     UserID INT PRIMARY KEY,
     UserName VARCHAR(50),
     Email VARCHAR(100),
-    Password VARCHAR(255), -- Use appropriate length for password hashes
+    Password VARCHAR(255),
     UserType ENUM('Admin', 'Regular User')
 );
+
 
 CREATE TABLE Meetings (
     MeetingID INT PRIMARY KEY,
@@ -21,6 +23,7 @@ CREATE TABLE Meetings (
     FOREIGN KEY (OrganizerID) REFERENCES Users(UserID)
 );
 
+
 CREATE TABLE Files (
     FileID INT PRIMARY KEY,
     FileName VARCHAR(255),
@@ -32,20 +35,21 @@ CREATE TABLE Files (
     FOREIGN KEY (UploadedByUserID) REFERENCES Users(UserID)
 );
 
+
 CREATE TABLE Interactions (
     InteractionID INT PRIMARY KEY,
-    -- MeetingID INT,  -- when the interaction with meeting
+    MeetingID INT,
     UserID INT,
     FileID INt,        
     InteractionType VARCHAR(50),
     InteractionContent TEXT,
     InteractionDateTime TIMESTAMP,
-    -- FOREIGN KEY (MeetingID) REFERENCES Meetings(MeetingID),  -- cancelled
+    FOREIGN KEY (MeetingID) REFERENCES Meetings(MeetingID),
     FOREIGN KEY (UserID) REFERENCES Users(UserID),
      FOREIGN KEY (FileID) REFERENCES Files(FileID)
 );
 
-/*
+
 CREATE TABLE Votes (
     VoteID INT PRIMARY KEY,
     MeetingID INT,
@@ -55,9 +59,3 @@ CREATE TABLE Votes (
     FOREIGN KEY (MeetingID) REFERENCES Meetings(MeetingID),
     FOREIGN KEY (UserID) REFERENCES Users(UserID)
 ); 
-Cancelled because the votes for files not about attending meetings or not as I thought
- */
-
-
-
-
