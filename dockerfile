@@ -1,16 +1,16 @@
-# Use the official MySQL image as the base image
-FROM mysql:8.0
+# Use the official PostgreSQL image as the base
+FROM postgres:16-alpine
 
-COPY *.sql /docker-entrypoint-initdb.d/
+# Set this environment variable to ensure UTF-8 encoding is used
+ENV LANG en_US.utf8
 
-# Set environment variables (for root password, database, and user)
-ENV MYSQL_ROOT_PASSWORD=rootpassword
-ENV MYSQL_DATABASE=meeting_fiiles
-ENV MYSQL_USER=myuser
-ENV MYSQL_PASSWORD=mypassword
+# Copy initialization scripts into the special Docker entry point directory.
+# PostgreSQL will automatically execute all scripts in this folder alphabetically
+# on the first run of the container. We use numerical prefixes to ensure order:
+# 1. Create the database tables (DDL).
+# 2. Populate the tables with initial data (DML).
+COPY create_db.sql /docker-entrypoint-initdb.d/1-create_schema.sql
+COPY populate_data.sql /docker-entrypoint-initdb.d/2-populate_data.sql
 
-# Expose the default MySQL port
-EXPOSE 3306
-
-# Default command to run MySQL server
-CMD ["mysqld"]
+# The default exposed port is 5432, but it's good practice to explicitly state it.
+EXPOSE 5432

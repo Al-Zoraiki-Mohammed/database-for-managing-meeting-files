@@ -1,0 +1,31 @@
+version: '3.8'
+
+services:
+  db:
+    # Use 'build: .' to instruct Docker Compose to build the image using the Dockerfile
+    # located in the current directory.
+    build:
+      context: .
+
+    container_name: meeting_files_db
+
+    # Environment variables required by the Postgres image
+    environment:
+      # This creates the database when the container starts
+      POSTGRES_DB: meeting_files_db
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password_secure
+      
+    # Map the container port 5432 to the host port 5432, allowing external clients (like pgAdmin) to connect
+    ports:
+      - "5432:5432" 
+  
+    # Use a named volume for persistent storage of the actual database data.
+    # This ensures data persists even if the container is stopped and restarted later.
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      
+    # Always restart the container if it stops unexpectedly
+    restart: always
+volumes:
+  postgres_data:
